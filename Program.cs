@@ -11,7 +11,6 @@ namespace Xadrez_console
     {
         public static void Main(string[] args)
         {
-            Console.Clear();
 
             try
             {
@@ -19,12 +18,20 @@ namespace Xadrez_console
 
                 while (!partida.terminada)
                 {
+                    Console.Clear();
                     Tela.imprimirTabuleiro(partida.tab);
 
                     System.Console.WriteLine();
                     System.Console.WriteLine("Origem: ");
                     Posicao origem = Tela.LerPosicaoXadrez().toPosicao();
-                    System.Console.WriteLine("Destini: ");
+
+                    bool[,] posicoesPossiveis = partida.tab.peca(origem).MovimentosPossiveis();
+
+                    Console.Clear();
+                    Tela.imprimirTabuleiro(partida.tab, posicoesPossiveis);
+
+                    System.Console.WriteLine();
+                    System.Console.WriteLine("Destino: ");
                     Posicao destino = Tela.LerPosicaoXadrez().toPosicao();
 
                     partida.ExecutarMovimento(origem, destino);
