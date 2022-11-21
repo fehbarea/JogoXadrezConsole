@@ -24,6 +24,10 @@ namespace tabuleiro
         {
             QtdMovimentos++;
         }
+        public void DecrementarQtdMovimento()
+        {
+            QtdMovimentos--;
+        }
         public bool ExiseMovimentosPossiveis(){
             bool [,] mat = MovimentosPossiveis();
             for(int i = 0; i < Tab.Linhas; i++){
@@ -36,7 +40,7 @@ namespace tabuleiro
             return false;
         }
         
-        public bool PodeMoverPara(Posicao pos){
+        public bool MovimentoPossivel(Posicao pos){
             return MovimentosPossiveis()[pos.Linha,pos.Coluna];
         }
 

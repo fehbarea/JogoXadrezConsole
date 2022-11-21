@@ -15,25 +15,42 @@ namespace Xadrez_console
             System.Console.WriteLine();
             ImprimirPecasCapturadas(partida);
             System.Console.WriteLine($"Turno: {partida.turno}");
-            System.Console.WriteLine($"Aguardando jogada: {partida.jogadorAtual}");
+            if (!partida.terminada)
+            {
+                System.Console.WriteLine($"Aguardando jogada: {partida.jogadorAtual}");
+                if (partida.xeque)
+                {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine("XEQUE!!");
+                    Console.ForegroundColor = aux;
+                }
+            }
+            else{
+            System.Console.WriteLine("XEQUEMATE!!");
+            System.Console.WriteLine($"Vencedor: {partida.jogadorAtual}");
+            }
         }
 
-        public static void ImprimirPecasCapturadas(PartidaDeXadrez partida){
+        public static void ImprimirPecasCapturadas(PartidaDeXadrez partida)
+        {
             System.Console.WriteLine("Peças capturadas:");
             System.Console.Write("Brancas: ");
             ImprimirConjunto(partida.pecasCaptudaras(Cor.Branca));
             System.Console.WriteLine();
             System.Console.Write("Preta: ");
-            ConsoleColor aux =  Console.ForegroundColor;
+            ConsoleColor aux = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Yellow;
             ImprimirConjunto(partida.pecasCaptudaras(Cor.Preta));
             Console.ForegroundColor = aux;
         }
 
-        public static void ImprimirConjunto(HashSet<Peca> conjunto){
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        {
             System.Console.Write("[");
-            foreach(var x in conjunto){
-                System.Console.Write(x+ " ");
+            foreach (var x in conjunto)
+            {
+                System.Console.Write(x + " ");
             }
             System.Console.WriteLine("]");
         }

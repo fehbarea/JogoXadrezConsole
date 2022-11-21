@@ -50,7 +50,6 @@ namespace tabuleiro
         }
         public bool ExistePeca (Posicao pos)
         {
-
             ValidarPosicao(pos);
             return peca(pos) != null;
         }
