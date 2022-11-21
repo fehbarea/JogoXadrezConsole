@@ -160,6 +160,20 @@ namespace Xadrez
                 desfazerMovimento(origem, destino, pecasCaptudaras);
                 throw new TabuleiroException("Voçe não pode colocar seu rei em xeque");
             }
+
+            Peca p = tab.peca(destino);
+            
+            // jogada especcial promocao
+
+            if(p is Peao){
+                if((p.Cor == Cor.Branca && destino.Linha == 0) || (p.Cor == Cor.Preta && destino.Linha == 7)){
+                    p = tab.RetirarPeca(destino);
+                    pecas.Remove(p);
+                    Peca dama = new Dama(tab, p.Cor);
+                    tab.ColocarPeca(dama, destino);
+                    pecas.Add(dama);
+                }
+            }
             if (EstaEmXeque(adversaria(jogadorAtual)))
             {
                 xeque = true;
@@ -179,7 +193,6 @@ namespace Xadrez
                 MuldaJogador();
             }
 
-            Peca p = tab.peca(destino);
 
             //Jogada especial emPassant
 
@@ -343,6 +356,7 @@ namespace Xadrez
             ColocarNovaPeca('e', 7, new Peao(tab, Cor.Preta, this));
             ColocarNovaPeca('f', 7, new Peao(tab, Cor.Preta, this));
             ColocarNovaPeca('g', 7, new Peao(tab, Cor.Preta, this));
+            ColocarNovaPeca('h', 7, new Peao(tab, Cor.Preta, this));
         }
     }
 }
